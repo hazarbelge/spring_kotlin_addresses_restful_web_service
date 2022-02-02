@@ -4,36 +4,56 @@ import com.hazarbelge.addresses.model.City
 import com.hazarbelge.addresses.model.Country
 import com.hazarbelge.addresses.repository.CityRepository
 import com.hazarbelge.addresses.repository.CountryRepository
+import com.hazarbelge.addresses.service.CityService
+import com.hazarbelge.addresses.service.CountryService
+import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
-import org.springframework.data.repository.findByIdOrNull
 
 @DataJpaTest
-class RepositoriesTests @Autowired constructor(
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class ServicesTests @Autowired constructor(
     val entityManager: TestEntityManager,
-    val countryRepository: CountryRepository,
-    val cityRepository: CityRepository,
 ) {
+    private final val countryRepository : CountryRepository = mockk()
+    private final val cityRepository : CityRepository = mockk()
+
+    val countryService = CountryService(countryRepository)
+    val cityService = CityService(cityRepository)
+
+    @BeforeAll
+    fun setup() {
+        println(">> Setup")
+    }
+
     @Test
-    fun `When findByIdOrNull then return City`() {
+    fun `When getCityById then return City`() {
         val turkey = Country(name = "Turkey", code = "TR", continent = "Europe")
         entityManager.persist(turkey)
-        val adana = City(name ="Adana", countryId = turkey.id)
+        val adana = City(name = "Adana", countryId = turkey.id)
         entityManager.persist(adana)
         entityManager.flush()
-        val found = cityRepository.findByIdOrNull(adana.id!!)
+        val found = cityService.getCityById(adana.id!!)
         assertThat(found).isEqualTo(adana)
     }
 
     @Test
-    fun `When findByCode then return Country`() {
+    fun `When getCountryByCode then return Country`() {
         val turkey = Country(name = "Turkey", code = "TR", continent = "Europe")
         entityManager.persist(turkey)
         entityManager.flush()
-        val country = countryRepository.findByCode(turkey.code)
+        val country = countryService.getCountryByCode(turkey.code)
         assertThat(country).isEqualTo(turkey)
+    }
+
+    @AfterAll
+    fun teardown() {
+        println(">> Tear down")
     }
 }
