@@ -1,0 +1,23 @@
+{{> header}}
+
+<h1>{{title}}</h1>
+
+<div class="country">
+
+    {{#countries}}
+        <section>
+            <header class="country-header">
+                <h2 class="country-title"><a href="/country/{{code}}">{{name}}</a></h2>
+                <div class="country-meta">By  <strong>{{name}}</strong>, on <strong>{{continent}}</strong></div>
+            </header>
+            <div class="country-description">
+                {{id}}
+                {{name}}
+                {{code}}
+                {{continent}}
+            </div>
+        </section>
+    {{/countries}}
+</div>
+
+{{> footer}}
