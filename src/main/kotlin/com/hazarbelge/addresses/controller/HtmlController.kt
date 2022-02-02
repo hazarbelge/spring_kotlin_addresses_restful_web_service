@@ -15,12 +15,15 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.server.ResponseStatusException
 
 @Controller
-class HtmlController(private val countryRepository: CountryRepository, private val cityRepository: CityRepository) : BaseController() {
+class HtmlController(
+    private val countryRepository: CountryRepository,
+    private val cityRepository: CityRepository
+) : BaseController() {
     @GetMapping("/")
-    fun address(model: Model): String {
+    fun addresses(model: Model): String {
         model["title"] = "Addresses"
         model["countries"] = countryRepository.findAllByOrderByNameAsc().map { it.render() }
-        return "address"
+        return "addresses"
     }
 
     fun Country.render() = RenderedCountry(
@@ -45,7 +48,8 @@ class HtmlController(private val countryRepository: CountryRepository, private v
         )
         model["title"] = country.code
         model["country"] = country
-        model["cities"] = cityRepository.findAllByCountryOrderByNameAsc(countryRepository.findByCode(code)!!).map { it.render() }
+        model["cities"] =
+            cityRepository.findAllByCountryOrderByNameAsc(countryRepository.findByCode(code)!!).map { it.render() }
         return "country"
     }
 
