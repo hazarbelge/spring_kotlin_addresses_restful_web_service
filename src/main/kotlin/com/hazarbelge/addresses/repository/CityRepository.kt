@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository
 @Repository
 interface CityRepository  : CrudRepository<City, Long> {
     fun findByName(name: String): City
+    override fun findAll(): Iterable<City>
     fun findAllByOrderByNameAsc(): Iterable<City>
     fun findAllByCountryOrderByNameAsc(country: Country): Iterable<City>
 }

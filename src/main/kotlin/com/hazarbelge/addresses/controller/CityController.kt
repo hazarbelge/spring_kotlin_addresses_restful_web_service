@@ -16,7 +16,7 @@ import org.springframework.web.server.ResponseStatusException
 class CityController(private val cityRepository: CityRepository) : BaseRestController() {
 
     @GetMapping("/")
-    fun findAll() = cityRepository.findAllByOrderByNameAsc()
+    fun findAll() = cityRepository.findAll()
 
     @GetMapping("/{id}")
     fun findByCode(@PathVariable id: Long) =

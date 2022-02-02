@@ -14,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException
 class CountryController(private val countryRepository: CountryRepository) : BaseRestController() {
 
     @GetMapping("/")
-    fun findAll() = countryRepository.findAllByOrderByNameAsc()
+    fun findAll() = countryRepository.findAll()
 
     @GetMapping("/{code}")
     fun findByCode(@PathVariable code: String) =
