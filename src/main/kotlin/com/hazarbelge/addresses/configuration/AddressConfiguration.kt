@@ -10,13 +10,13 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class AddressConfiguration {
-    @Bean
+    /*@Bean
     fun databaseInitializer(cityRepository: CityRepository, countryRepository: CountryRepository) = ApplicationRunner {
         countryRepository.save(Country(name = "Turkey", code = "TR", continent = "Europe"))
-        cityRepository.save(City(name = "İstanbul", country = countryRepository.findByCode("TR")!!))
-        cityRepository.save(City(name = "Ankara", country = countryRepository.findByCode("TR")!!))
-        cityRepository.save(City(name = "İzmir", country = countryRepository.findByCode("TR")!!))
+        cityRepository.save(City(name = "İstanbul", countryId = countryRepository.findByCode("TR")?.id))
+        cityRepository.save(City(name = "Ankara", countryId = countryRepository.findByCode("TR")?.id))
+        cityRepository.save(City(name = "İzmir", countryId = countryRepository.findByCode("TR")?.id))
         countryRepository.save(Country(name = "ABD", code = "US", continent = "America"))
-        cityRepository.save(City(name = "Washington", country = countryRepository.findByCode("US")!!))
-    }
+        cityRepository.save(City(name = "Washington", countryId = countryRepository.findByCode("US")?.id))
+    }*/
 }

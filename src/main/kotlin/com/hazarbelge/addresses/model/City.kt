@@ -3,8 +3,16 @@ package com.hazarbelge.addresses.model
 import javax.persistence.*
 
 @Entity
-class City(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long? = null,
-    var name: String,
-    @ManyToOne var country: Country,
+@Table(name = "CITY")
+data class City(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    val id: Long? = null,
+
+    @Column(name = "name")
+    val name: String,
+
+    @Column(name = "countryId")
+    val countryId: Long?,
 )
