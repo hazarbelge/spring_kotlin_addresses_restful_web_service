@@ -1,5 +1,6 @@
 package com.hazarbelge.addresses
 
+import org.springframework.boot.Banner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
@@ -8,6 +9,6 @@ class AddressesApplication
 
 fun main(args: Array<String>) {
 	runApplication<AddressesApplication>(*args) {
-		//setBannerMode(Banner.Mode.OFF)
+		setBannerMode(Banner.Mode.OFF)
 	}
 }
