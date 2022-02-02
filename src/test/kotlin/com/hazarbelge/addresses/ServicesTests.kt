@@ -12,15 +12,11 @@ import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
 
 @DataJpaTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class ServicesTests @Autowired constructor(
-    val entityManager: TestEntityManager,
-) {
+class ServicesTests {
     private final val countryRepository : CountryRepository = mockk()
     private final val cityRepository : CityRepository = mockk()
 
@@ -34,20 +30,18 @@ class ServicesTests @Autowired constructor(
 
     @Test
     fun `When getCityById then return City`() {
-        val turkey = Country(name = "Turkey", code = "TR", continent = "Europe")
-        entityManager.persist(turkey)
-        val adana = City(name = "Adana", countryId = turkey.id)
-        entityManager.persist(adana)
-        entityManager.flush()
+        val turkey = Country(id = 1, name = "Turkey", code = "TR", continent = "Europe")
+        countryService.post(turkey)
+        val adana = City(id = 1, name = "Adana", countryId = turkey.id)
+        cityService.post(adana)
         val found = cityService.getCityById(adana.id!!)
         assertThat(found).isEqualTo(adana)
     }
 
     @Test
     fun `When getCountryByCode then return Country`() {
-        val turkey = Country(name = "Turkey", code = "TR", continent = "Europe")
-        entityManager.persist(turkey)
-        entityManager.flush()
+        val turkey = Country(id = 1, name = "Turkey", code = "TR", continent = "Europe")
+        countryService.post(turkey)
         val country = countryService.getCountryByCode(turkey.code)
         assertThat(country).isEqualTo(turkey)
     }

@@ -2,13 +2,11 @@ package com.hazarbelge.addresses.controller
 
 import com.hazarbelge.addresses.base.BaseRestController
 import com.hazarbelge.addresses.model.City
+import com.hazarbelge.addresses.model.Country
 import com.hazarbelge.addresses.model.ResponseModel
 import com.hazarbelge.addresses.service.CityService
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 
 @RestController
@@ -39,5 +37,15 @@ class CityController(private val cityService: CityService) : BaseRestController(
                 "This City does not exist",
             )
         }
+    }
+
+    @PostMapping("")
+    fun createCity(@RequestBody city: City) {
+        cityService.post(city)
+    }
+
+    @PutMapping("")
+    fun updateCity(@RequestBody city: City) {
+        cityService.post(city)
     }
 }

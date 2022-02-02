@@ -36,10 +36,10 @@ class ApiTests(@Autowired val mockMvc: MockMvc) {
         mockMvc.perform(get("/api/city").accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk)
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("\$.[0].countryId").value(turkey.id))
-            .andExpect(jsonPath("\$.[0].name").value(izmir.name))
-            .andExpect(jsonPath("\$.[1].countryId").value(turkey.id))
-            .andExpect(jsonPath("\$.[1].name").value(istanbul.name))
+            .andExpect(jsonPath("\$.data.[0].countryId").value(turkey.id))
+            .andExpect(jsonPath("\$.data.[0].name").value(izmir.name))
+            .andExpect(jsonPath("\$.data.[1].countryId").value(turkey.id))
+            .andExpect(jsonPath("\$.data.[1].name").value(istanbul.name))
     }
 
     @Test
@@ -50,7 +50,7 @@ class ApiTests(@Autowired val mockMvc: MockMvc) {
         mockMvc.perform(get("/api/country").accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk)
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("\$.[0].code").value(turkey.code))
-            .andExpect(jsonPath("\$.[1].code").value(usa.code))
+            .andExpect(jsonPath("\$.data.[0].code").value(turkey.code))
+            .andExpect(jsonPath("\$.data.[1].code").value(usa.code))
     }
 }

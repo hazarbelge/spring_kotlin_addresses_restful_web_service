@@ -5,10 +5,7 @@ import com.hazarbelge.addresses.model.Country
 import com.hazarbelge.addresses.model.ResponseModel
 import com.hazarbelge.addresses.service.CountryService
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 
 @RestController
@@ -39,5 +36,15 @@ class CountryController(private val countryService: CountryService) : BaseRestCo
                 "This country does not exist",
             )
         }
+    }
+
+    @PostMapping("")
+    fun createCountry(@RequestBody country: Country) {
+        countryService.post(country)
+    }
+
+    @PutMapping("")
+    fun updateCountry(@RequestBody country: Country) {
+        countryService.post(country)
     }
 }
