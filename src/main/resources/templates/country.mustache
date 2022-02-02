@@ -12,6 +12,26 @@
         {{country.code}}
         {{country.continent}}
     </div>
+
+    <div class="city">
+
+        {{#cities}}
+            <section>
+                <header class="city-header">
+                    <h2 class="city-title"><a href="/country/{{country.code}}/city/{{id}}">{{name}}</a></h2>
+                    <div class="city-meta">By  <strong>{{name}}</strong>, on <strong>{{country.name}}</strong></div>
+                </header>
+                <div class="city-description">
+                    Id: {{id}},
+                    Name: {{name}},
+                    CountryID: {{country.id}},
+                    Country Name: {{country.name}},
+                    Country Code: {{country.code}},
+                    Country Continent: {{country.continent}}
+                </div>
+            </section>
+        {{/cities}}
+    </div>
 </section>
 
 {{> footer}}

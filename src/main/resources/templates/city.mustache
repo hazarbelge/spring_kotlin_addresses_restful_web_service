@@ -1,0 +1,19 @@
+{{> header}}
+
+<section class="city">
+    <header class="city-header">
+        <h1 class="city-name">{{city.name}}</h1>
+        <p class="city-meta">By  <strong>{{city.name}}</strong>, on <strong>{{city.country.code}}, {{city.country.name}}</strong></p>
+    </header>
+
+    <div class="city-description">
+        Id: {{city.id}},
+        Name: {{city.name}},
+        Country ID: {{city.country.id}},
+        Country Name: {{city.country.name}},
+        Country Code: {{city.country.code}},
+        Country Continent: {{city.country.continent}}
+    </div>
+</section>
+
+{{> footer}}
